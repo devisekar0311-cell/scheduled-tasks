@@ -1,3 +1,4 @@
+import os
 import smtplib
 
 import pandas
@@ -34,14 +35,14 @@ if today_tuple in birthday_dict:
 
     # 5. Print or check the updated letter
     print(new_letter)
-    my_email = "devisekar0311@gmail.com"
-    password = "jppn sfnr slwd ihqi"
+ MY_EMAIL = os.environ.get("MY_EMAIL")
+ MY_PASSWORD = os.environ.get("MY_PASSWORD")
     message = f"Subject: Happy Birthday\n\n{new_letter}"
 
     with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
         smtp.starttls()
-        smtp.login(user=my_email, password=password)
-        smtp.sendmail(from_addr=my_email,to_addrs=birthday_person["email"], msg=message)
+        smtp.login(user=MY_EMAIL, password=MY_PASSWORD)
+        smtp.sendmail(from_addr=MY_EMAIL,to_addrs=birthday_person["email"], msg=message)
         print(f"Birthday email sent to {birthday_person['name']}!")
 
 
