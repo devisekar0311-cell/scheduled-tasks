@@ -31,19 +31,16 @@ if today_tuple in birthday_dict:
         content = letter_file.read()
 
     # 4. Replace [NAME] with the actual name from the dictionary
-    new_letter = content.replace("[NAME]", birthday_person["name"])
+        new_letter = content.replace("[NAME]", birthday_person["name"])
+        MY_EMAIL = os.environ.get("MY_EMAIL")
+        MY_PASSWORD = os.environ.get("MY_PASSWORD")
+        message = f"Subject: Happy Birthday\n\n{new_letter}"
 
-    # 5. Print or check the updated letter
-    print(new_letter)
-   MY_EMAIL = os.environ.get("MY_EMAIL")
-   MY_PASSWORD = os.environ.get("MY_PASSWORD")
-   message = f"Subject: Happy Birthday\n\n{new_letter}"
-
-    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
-        smtp.starttls()
-        smtp.login(user=MY_EMAIL, password=MY_PASSWORD)
-        smtp.sendmail(from_addr=MY_EMAIL,to_addrs=birthday_person["email"], msg=message)
-        print(f"Birthday email sent to {birthday_person['name']}!")
+        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+            smtp.starttls()
+            smtp.login(user=MY_EMAIL, password=MY_PASSWORD)
+            smtp.sendmail(from_addr=MY_EMAIL,to_addrs=birthday_person["email"], msg=message)
+            print(f"Birthday email sent to {birthday_person['name']}!")
 
 
 
